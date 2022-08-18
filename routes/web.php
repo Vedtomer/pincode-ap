@@ -13,7 +13,7 @@ Use App\Http\Controllers\PincodeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [PincodeController::class, 'index'])->name('index');
+Route::get('/{state?}/{city?}/{PostOffice?}', [PincodeController::class, 'index'])->name('index');
 Route::post('/getDistrict', [PincodeController::class, 'getDistrict'])->name('getDistrict');
 Route::post('/getpostoffice', [PincodeController::class, 'getpostoffice'])->name('getpostoffice');
 Route::get('/find-pincode', [PincodeController::class, 'findpincode'])->name('findpincode');
