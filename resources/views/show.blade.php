@@ -55,51 +55,51 @@
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">officename</span>
+					<span class="label-input100">Office Name</span>
 					<input class="input100" type="text" name="name" value="{{$data['officename']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">Districtname</span>
+					<span class="label-input100">District Name</span>
 					<input class="input100" type="text" name="name" value="{{$data['Districtname']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">statename</span>
+					<span class="label-input100">State Name</span>
 					<input class="input100" type="text" name="name" value="{{$data['statename']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">officeType</span>
+					<span class="label-input100">Office Type</span>
 					<input class="input100" type="text" name="name" value="{{$data['officeType']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">Deliverystatus</span>
+					<span class="label-input100">Delivery Status</span>
 					<input class="input100" type="text" name="name" value="{{$data['Deliverystatus']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">divisionname</span>
+					<span class="label-input100">Division name</span>
 					<input class="input100" type="text" name="name" value="{{$data['divisionname']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">regionname</span>
+					<span class="label-input100">Region name</span>
 					<input class="input100" type="text" name="name" value="{{$data['regionname']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">circlename</span>
+					<span class="label-input100">Circle Name</span>
 					<input class="input100" type="text" name="name" value="{{$data['circlename']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
@@ -120,13 +120,13 @@
 
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">RelatedSuboffice</span>
+					<span class="label-input100">Related Sub-office</span>
 					<input class="input100" type="text" name="name" value="{{$data['RelatedSuboffice']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>
 
                 <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">RelatedHeadoffice</span>
+					<span class="label-input100">Related Head-office</span>
 					<input class="input100" type="text" name="name" value="{{$data['RelatedHeadoffice']}}" readonly>
 					<span class="focus-input100"></span>
 				</div>

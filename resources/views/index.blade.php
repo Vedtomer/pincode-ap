@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Search Pincode</title>
+	<title>Search Pincode | India Pincode</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Search Near by pincode details">
-    <meta name="keywords" content="pincode,postal code">
-	
+    <meta name="keywords" content="pincode,postal code,indian pincode">
+<meta name="description" content="India Post, Ministry of Communication &amp; Technology" />
+<meta name="author" content="India Post, Ministry of Communication &amp; Technology" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -46,29 +50,17 @@
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form" action="find-pincode">
-				<span class="contact100-form-title">
+				<h1 class="contact100-form-title">
 					Search Pincode!
-				</span>
-
-				<!-- <div class="wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">Your Name</span>
-					<input class="input100" type="text" name="name" placeholder="Enter your name">
-					<span class="focus-input100"></span>
-				</div> -->
-
-				<!-- <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<span class="label-input100">Email</span>
-					<input class="input100" type="text" name="email" placeholder="Enter your email addess">
-					<span class="focus-input100"></span>
-				</div> -->
-
+				</h1>
 				<div class="wrap-input100 input100-select">
 					<span class="label-input100">State</span>
 					<div>
+						
 						<select class="selection-2" name="state" onchange="getDistrict(this.value)" id="state"> 
                         <option>Select State</option>   
-						@foreach($data as $data)
-							<option value="{{$data['statename']}}">{{$data['statename']}}</option>
+						@foreach($data['state'] as $state)
+							<option value="{{$state['statename']}}" @if(!empty($reqdata['state']) && $reqdata['state']== $state['statename']) selected @endif>{{$state['statename']}}</option>
 							@endforeach
 
 						</select>
@@ -79,8 +71,17 @@
 				<div class="wrap-input100 input100-select">
 					<span class="label-input100">City or District</span>
 					<div>
+					
 						<select class="selection-2" name="district" id="city" onchange="getPostoffice(this.value)">
+							
+							@if(!empty($data['city']))
+							@foreach($data['city'] as $city)
+							
+							<option value="{{$city['name']}}" @if(!empty($reqdata['city']) && $reqdata['city']== $city['name']) selected @endif>{{$city['name']}}</option>
+							@endforeach
+							@else
 							<option>Select City</option>
+							@endif
 							
 						</select>
 					</div>
@@ -90,8 +91,18 @@
                 <div class="wrap-input100 input100-select">
 					<span class="label-input100">Post Office</span>
 					<div>
-						<select class="selection-2" name="officename" id="post">
+						<select class="selection-2" name="officename" id="post"  onchange="getoffice(this.value)">
+						
+						@if(!empty($data['postoffice']))
+						<option selected>Select Post office</option>
+							@foreach($data['postoffice'] as $postoffice)
+							
+							<option value="{{$postoffice['officename']}}" @if(!empty($reqdata['city']) && $reqdata['city']== $postoffice['officename']) selected @endif>{{$postoffice['officename']}}</option>
+							@endforeach
+							@else
 							<option>Select Post office</option>
+							@endif
+						
 							
 						</select>
 					</div>
@@ -106,7 +117,7 @@
 					<span class="focus-input100"></span>
 				</div> -->
 
-				<div class="container-contact100-form-btn">
+				<!-- <div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
 						<button class="contact100-form-btn">
@@ -116,7 +127,7 @@
 							</span>
 						</button>
 					</div>
-				</div>
+				</div> -->
 			</form>
 		</div>
 	</div>
@@ -161,6 +172,9 @@
   
 
   function getDistrict(data) {
+	let url="{{  Request::url() }}"+"?state="+data;
+	window.location.href =url;
+	
 
 $.ajax({
   url: "/getDistrict",
@@ -204,7 +218,8 @@ $.ajax({
 function getPostoffice(data) {
 
 
-    
+    let url="{{  url()->full() }}"+"&city="+data;
+	window.location.href =url;
 
 
     var state=$('#state').val();
@@ -247,6 +262,15 @@ $.ajax({
 }
 
 
+
+function getoffice(data) {
+
+
+let url="{{  url()->full() }}"+"&Post-Office="+data;
+url = url.replace('&amp;','&');
+//alert(url);die;
+window.location.href =url;
+}
 
 
 

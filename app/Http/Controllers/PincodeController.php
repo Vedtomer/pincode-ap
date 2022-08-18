@@ -7,10 +7,30 @@ Use App\Models\Pincode;
 
 class PincodeController extends Controller
 {
-    public function index(){
-        $data=Pincode::select('statename')->distinct()->orderBy('statename')->get()->toArray();
+    public function index(Request $request){
+       $reqdata= $request->all();
+       //return $request->{'Post-Office'};
+        $data['state']=Pincode::select('statename')->distinct()->orderBy('statename')->get()->toArray();
+        if(!empty($request->state)){
+         $data['city']=Pincode::select('Districtname as name')->where('statename',$request->state)->distinct()->orderBy('Districtname')->get()->toArray();
+        }
+
+        if(!empty($request->city)){
+            $data['postoffice']= Pincode::select('officename')->where('statename',$request->state)
+       ->where('Districtname',$request->city)->get();
+           }
+
+           if(!empty($request->{'Post-Office'})){
+            $data=Pincode::where('statename',$request->state)->where('Districtname',$request->city)
+        ->where('officename',$request->{'Post-Office'})->first()->toArray();
+
+        return view('show',compact('data')); 
+           }
+
+           
+        
     
-        return view('index',compact('data'));
+        return view('index',compact('data'),['reqdata'=>$reqdata]);
     }
 
     public function getDistrict(Request $request){
