@@ -16,6 +16,7 @@ Use App\Http\Controllers\SitemapController;
 */
 //Route::get('/api', [PincodeController::class, 'API'])->name('API');
 Route::get('sitemap.xml',[SitemapController::class, 'index']);
+Route::get('pincode-finder', [PincodeController::class, 'PincodeFinder']);
 Route::get('/{state?}/{city?}/{PostOffice?}', [PincodeController::class, 'index'])->name('index');
 
 /*

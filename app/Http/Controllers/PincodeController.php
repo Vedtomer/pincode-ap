@@ -70,6 +70,12 @@ class PincodeController extends Controller
 
 
 
+    public function PincodeFinder(){
+        return view('finder');
+    }
+
+
+
     public function API()
     {
         $data = Pincode::whereNull("statename")->get()->toArray();
