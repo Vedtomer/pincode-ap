@@ -101,7 +101,7 @@ class PincodeController extends Controller
     {
 
         
-       $pin=Pincode::orderBy('id','desc')->where('slug',"=","")->limit(10000)->get()->toArray();
+        $pin=Pincode::orderBy('id','desc')->whereNull('slug')->limit(30000)->get()->toArray();
        set_time_limit (0);
        ini_set('memory_limit', '-1');
         if(!empty($pin)){
