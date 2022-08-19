@@ -18,6 +18,10 @@ Route::get('/api', [PincodeController::class, 'API'])->name('API');
 Route::get('/find-pincode/{slug}', [PincodeController::class, 'FindPincode'])->name('find-pincode');
 
 Route::get('sitemap.xml',[SitemapController::class, 'index']);
+Route::get('sitemap1.xml',[SitemapController::class, 'Sitemap1']);
+Route::get('sitemap2.xml',[SitemapController::class, 'Sitemap2']);
+Route::get('sitemap3.xml',[SitemapController::class, 'Sitemap3']);
+
 Route::get('easy-pincode-search', [PincodeController::class, 'PincodeFinder'])->name('pincode-finder');
 Route::get('/{state?}/{city?}/{PostOffice?}', [PincodeController::class, 'index'])->name('index');
 

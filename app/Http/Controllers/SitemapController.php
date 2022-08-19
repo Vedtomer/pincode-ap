@@ -1,22 +1,61 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-Use App\Models\Pincode;
+use App\Models\Pincode;
 use App\Post;
 use Illuminate\Http\Request;
 
 
 class SitemapController extends Controller
 {
-    
+
     public function index(Request $r)
     {
-       
-        $pincode = Pincode::select('slug','updated_at')->where('slug',"!=","")->limit(10)->get()->toArray();
+
+        $pincode = Pincode::select('slug', 'updated_at')->where('slug', "!=", "")
+            ->where('id', '=<', '45000')
+            ->get()->toArray();
 
         return response()->view('sitemap', compact('pincode'))
-          ->header('Content-Type', 'text/xml');
+            ->header('Content-Type', 'text/xml');
+    }
 
+
+    public function Sitemap1(Request $r)
+    {
+
+        $pincode = Pincode::select('slug', 'updated_at')->where('slug', "!=", "")
+            ->where('id', '>', '45000')
+            ->where('id', '=<', '90000')
+            ->get()->toArray();
+
+        return response()->view('sitemap', compact('pincode'))
+            ->header('Content-Type', 'text/xml');
+    }
+
+    public function Sitemap2(Request $r)
+    {
+
+        $pincode = Pincode::select('slug', 'updated_at')->where('slug', "!=", "")
+            ->where('id', '>', '90000')
+            ->where('id', '=<', '135000')
+            ->get()->toArray();
+
+        return response()->view('sitemap', compact('pincode'))
+            ->header('Content-Type', 'text/xml');
+    }
+
+    public function Sitemap3(Request $r)
+    {
+
+        $pincode = Pincode::select('slug', 'updated_at')->where('slug', "!=", "")
+            ->where('id', '>', '135000')
+            ->get()->toArray();
+
+        return response()->view('sitemap', compact('pincode'))
+            ->header('Content-Type', 'text/xml');
     }
 }
