@@ -101,9 +101,10 @@ class PincodeController extends Controller
     {
 
         
-       $pin=Pincode::orderBy('id','desc')->get()->toArray();
+       $pin=Pincode::orderBy('id','desc')->where('slug',"=","")->limit(10000)->get()->toArray();
        set_time_limit (0);
-
+       ini_set('memory_limit', '-1');
+        if(!empty($pin)){
        foreach($pin as $dd){
         $slug=new Slug();
         $name= $dd['statename']."-".$dd['Districtname'].'-'.$dd['officename'];
@@ -119,6 +120,9 @@ class PincodeController extends Controller
        echo $slug;
        //echo "<br>";
        }
+    }else{
+        echo "done";
+    }
        
       
         // $data = Pincode::whereNull("statename")->get()->toArray();
