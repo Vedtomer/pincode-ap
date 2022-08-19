@@ -14,7 +14,7 @@ Use App\Http\Controllers\SitemapController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/api', [PincodeController::class, 'API'])->name('API');
+//Route::get('/api', [PincodeController::class, 'API'])->name('API');
 Route::get('sitemap.xml',[SitemapController::class, 'index']);
 Route::get('/{state?}/{city?}/{PostOffice?}', [PincodeController::class, 'index'])->name('index');
 
