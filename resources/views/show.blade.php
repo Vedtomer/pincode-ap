@@ -4,8 +4,8 @@
 	<title>Search Pincode Information</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Search Near by pincode details">
-    <meta name="keywords" content="pincode,postal code">
+	<meta name="description" content="{{ str_replace('/', '-', $data['slug'])}} ">
+    <meta name="keywords" content="pincode,postal code,indian,indian,{{ str_replace('/', ',', $data['slug'])}} ">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{{ URL::asset('images/icons/favicon.ico')}}"/>
 <!--===============================================================================================-->
@@ -37,8 +37,38 @@
 
   gtag('config', 'G-147KKNRCL0');
 </script>
+
+<style>
+
+
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+            float: right !important;
+            
+        }
+    </style>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('pincode-finder')}}">Easy Pincode Search</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
 
 
 	<div class="container-contact100">
@@ -159,7 +189,7 @@
 
 
 
-	<div id="dropDownSelect1"></div>
+
 
 <!--===============================================================================================-->
 	<script src="{{ URL::asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>

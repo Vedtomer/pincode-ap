@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pincode;
+use App\Models\Slug;
 use Illuminate\Support\Facades\View;
+use DataTables;
 
 class PincodeController extends Controller
 {
@@ -59,18 +61,37 @@ class PincodeController extends Controller
         return response()->json(['data' => $data]);
     }
 
-    public function findpincode(Request $request)
+    // public function findpincode(Request $request)
+    // {
+    //     // return $request;
+    //     $data = Pincode::where('statename', $request->state)->where('Districtname', $request->district)
+    //         ->where('officename', $request->officename)->first()->toArray();
+
+    //     return view('show', compact('data'));
+    // }
+
+
+
+    public function PincodeFinder(Request $request)
     {
-        // return $request;
-        $data = Pincode::where('statename', $request->state)->where('Districtname', $request->district)
-            ->where('officename', $request->officename)->first()->toArray();
+           
+        if ($request->ajax()) {
+            
+            $data = Pincode::select('slug','Districtname','statename','officename','pincode');
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('Details', function ($row){
+                    
+                    $url= url("Open.png");
+                    $btn = "<a href={$row['slug']} target='_blank'>
+                    <img src=$url alt='Details' title='Details'></a>";
 
-        return view('show', compact('data'));
-    }
+                    return $btn;
+                })
+                ->rawColumns(['Details'])
+                ->make(true);
+        }
 
-
-
-    public function PincodeFinder(){
         return view('finder');
     }
 
@@ -78,51 +99,88 @@ class PincodeController extends Controller
 
     public function API()
     {
-        $data = Pincode::whereNull("statename")->get()->toArray();
-        foreach ($data as $rc) {
-            $pin = $rc['pincode'];
-            $url = "https://api.postalpincode.in/pincode/" . $pin;
-            $content = json_decode(file_get_contents($url));
-            $postof = $content[0]->PostOffice;
-            foreach ($postof as $post) {
-                // echo "<pre>";
-                // print_r($rc);
-                // print_r($post);
-                // echo "next";
-                // echo "</pre>";
-                
-               $offname = str_replace(' B.O', '', $rc['officename']);
-             // echo "=====";
-                  $appname = $post->Name;
-              // echo "<br>";
 
-                $offDeliveryStatus = $rc['Deliverystatus'];
-                $appDeliveryStatus = $post->DeliveryStatus;
+        
+       $pin=Pincode::orderBy('id','desc')->get()->toArray();
+       set_time_limit (0);
 
-                $offDivision = $rc['divisionname'];
-                $appDivision = $post->Division;
+       foreach($pin as $dd){
+        $slug=new Slug();
+        $name= $dd['statename']."-".$dd['Districtname'].'-'.$dd['officename'];
+        $name=str_replace(' B.O', '', $name);
+        $name=str_replace(' S.O', '', $name);
+      // echo $name;
+       echo "<br>";
+       $slug= $slug->CreateSlug($name);
+       $pp=Pincode::find($dd['id']);
+       $pp->slug=$slug;
+       $pp->save();
+       
+       echo $slug;
+       //echo "<br>";
+       }
+       
+      
+        // $data = Pincode::whereNull("statename")->get()->toArray();
+        // foreach ($data as $rc) {
+        //     $pin = $rc['pincode'];
+        //     $url = "https://api.postalpincode.in/pincode/" . $pin;
+        //     $content = json_decode(file_get_contents($url));
+        //     $postof = $content[0]->PostOffice;
+        //     foreach ($postof as $post) {
+        //         // echo "<pre>";
+        //         // print_r($rc);
+        //         // print_r($post);
+        //         // echo "next";
+        //         // echo "</pre>";
+
+        //         $offname = str_replace(' B.O', '', $rc['officename']);
+        //         // echo "=====";
+        //         $appname = $post->Name;
+        //         // echo "<br>";
+
+        //         $offDeliveryStatus = $rc['Deliverystatus'];
+        //         $appDeliveryStatus = $post->DeliveryStatus;
+
+        //         $offDivision = $rc['divisionname'];
+        //         $appDivision = $post->Division;
 
 
-                $offCircle = $rc['circlename'];
-                $appCircle = $post->Circle;
+        //         $offCircle = $rc['circlename'];
+        //         $appCircle = $post->Circle;
 
-                $offRegion = $rc['regionname'];
-                $appRegion = $post->Region;
+        //         $offRegion = $rc['regionname'];
+        //         $appRegion = $post->Region;
 
-                if (
-                    $offDeliveryStatus == $appDeliveryStatus &&
-                     $offname == $appname  &&
-                     $offDivision == $appDivision &&
-                     $offCircle == $appCircle &&
-                     $offRegion == $appRegion
-                ) {
-                    echo "cccc";
-                   $pincode = Pincode::find($rc['id']);
-                    $pincode->statename = $post->State;;
-                    $pincode->Districtname = $post->District;
-                    $pincode->save();
-                }
-            }
-        }
+        //         if (
+        //             $offDeliveryStatus == $appDeliveryStatus &&
+        //             $offname == $appname  &&
+        //             $offDivision == $appDivision &&
+        //             $offCircle == $appCircle &&
+        //             $offRegion == $appRegion
+        //         ) {
+        //             echo "cccc";
+        //             $pincode = Pincode::find($rc['id']);
+        //             $pincode->statename = $post->State;;
+        //             $pincode->Districtname = $post->District;
+        //             $pincode->save();
+        //         }
+        //     }
+        // }
     }
+
+
+    public function FindPincode($slug=null){
+
+        if (!empty($slug)) {
+            $data = Pincode::where('slug', $slug)->first()->toArray();
+
+            return View::make('show', compact('data'));
+        }else{
+            $data['state'] = Pincode::select('statename')->distinct()->orderBy('statename')->get()->toArray();
+            return view('index', compact('data'));
+        }
+
+    }
+    
 }

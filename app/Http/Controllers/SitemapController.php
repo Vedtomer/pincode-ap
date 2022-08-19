@@ -13,7 +13,7 @@ class SitemapController extends Controller
     public function index(Request $r)
     {
        
-        $pincode = Pincode::all();
+        $pincode = Pincode::select('slug','updated_at')->where('slug',"!=","")->limit(10)->get()->toArray();
 
         return response()->view('sitemap', compact('pincode'))
           ->header('Content-Type', 'text/xml');
