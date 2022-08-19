@@ -85,7 +85,7 @@ class PincodeController extends Controller
                 // echo "next";
                 // echo "</pre>";
                 
-               $offname = str_replace(' S.O', '', $rc['officename']);
+               $offname = str_replace(' B.O', '', $rc['officename']);
              // echo "=====";
                   $appname = $post->Name;
               // echo "<br>";
