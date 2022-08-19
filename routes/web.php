@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\PincodeController;
+Use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,13 @@ Use App\Http\Controllers\PincodeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/api', [PincodeController::class, 'API'])->name('API');
+Route::get('sitemap.xml',[SitemapController::class, 'index']);
 Route::get('/{state?}/{city?}/{PostOffice?}', [PincodeController::class, 'index'])->name('index');
+
+/*
 Route::post('/getDistrict', [PincodeController::class, 'getDistrict'])->name('getDistrict');
 Route::post('/getpostoffice', [PincodeController::class, 'getpostoffice'])->name('getpostoffice');
 Route::get('/find-pincode', [PincodeController::class, 'findpincode'])->name('findpincode');
+*/
 
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
