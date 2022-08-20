@@ -1,2 +1,10 @@
 User-agent: *
 Disallow:
+
+User-agent: *
+Allow: /
+
+Sitemap: https://pincode.tech/sitemap.xml
+Sitemap: https://pincode.tech/sitemap1.xml
+Sitemap: https://pincode.tech/sitemap2.xml
+Sitemap: https://pincode.tech/sitemap3.xml
