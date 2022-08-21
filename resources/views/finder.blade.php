@@ -53,13 +53,13 @@
     <div class="container-contact100">
 
        
-        <div class="wrap-contact100" style="width: 100%;">
+        <div class="wrap-contact100 table-responsive" style="width: 100%;">
 
             <h1 class="contact100-form-title">
                 Pincode Finder Tool
             </h1>
 
-            <table class="table table-bordered data-table">
+            <table class="table table-bordered data-table table-sm">
                 <thead>
                     <tr>
 
