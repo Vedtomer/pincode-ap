@@ -41,7 +41,7 @@ class SitemapController extends Controller
 
         $pincode = Pincode::select('slug', 'updated_at')->where('slug', "!=", "")
             ->where('id', '>', '5000')
-            ->where('id', '<=', '9500')
+            ->where('id', '<=', '9000')
             ->get()->toArray();
 
         return response()->view('sitemap', compact('pincode'))
