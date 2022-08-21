@@ -17,10 +17,10 @@
             display: none;
         }
 
-        nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+        /* nav.navbar.navbar-expand-lg.navbar-light.bg-light {
             float: right !important;
             
-        }
+        } */
     </style>
 </head>
 
