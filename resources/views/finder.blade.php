@@ -17,6 +17,10 @@
             display: none;
         }
 
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0px !important;
+        }
+
         /* nav.navbar.navbar-expand-lg.navbar-light.bg-light {
             float: right !important;
             
@@ -59,7 +63,8 @@
                 Pincode Finder Tool
             </h1>
 
-            <table class="table table-bordered data-table table-sm">
+            
+            <table id="kl" class="table table-striped table-bordered " style="width:100%">
                 <thead>
                     <tr>
 
@@ -101,7 +106,7 @@
 <script type="text/javascript">
     $(function() {
 
-        var table = $('.data-table').DataTable({
+        var table = $('#kl').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('pincode-finder') }}",
