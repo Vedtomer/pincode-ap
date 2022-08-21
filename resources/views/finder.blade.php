@@ -20,6 +20,13 @@
         .dataTables_wrapper .dataTables_paginate .paginate_button {
             padding: 0px !important;
         }
+        .page-item:first-child .page-link{
+            display: none;
+        }
+
+        .page-item:last-child .page-link{
+            display: none;
+        }
 
         /* nav.navbar.navbar-expand-lg.navbar-light.bg-light {
             float: right !important;
