@@ -19,7 +19,7 @@ Route::get('/find-pincode/{slug}', [PincodeController::class, 'FindPincode'])->n
 
  Route::get('sitemap.xml',[SitemapController::class, 'index']);
  Route::get('sitemap1.xml',[SitemapController::class, 'Sitemap1']);
-// Route::get('sitemap2.xml',[SitemapController::class, 'Sitemap2']);
+ Route::get('sitemap2.xml',[SitemapController::class, 'Sitemap2']);
 // Route::get('sitemap3.xml',[SitemapController::class, 'Sitemap3']);
 
 Route::get('easy-pincode-search', [PincodeController::class, 'PincodeFinder'])->name('pincode-finder');
