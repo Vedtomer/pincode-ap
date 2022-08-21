@@ -43,13 +43,6 @@
   gtag('config', 'G-147KKNRCL0');
 </script>
 
-<style>
-       
-        nav.navbar.navbar-expand-lg.navbar-light.bg-light {
-            float: right !important;
-            
-        }
-    </style>
 </head>
 <body>
 
